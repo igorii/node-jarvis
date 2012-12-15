@@ -1,24 +1,26 @@
 <html>
 	<head>
-            <title>Jarvis Server</title>
-            <script src='./jarvis.js'></script>
-            <style>
-		#mic {
-		    font-size: 25px;
-		    width: 25px;
-		    height: 25px;
-		    cursor:pointer;
-		    border: none;
-		    position: absolute;
-		    margin-left: 5px;
-		    outline: none;
-		    background: transparent;
-		}
-            </style>
+        <title>Jarvis Server</title>
+        <script src='./jarvis.js'></script>
+        <style>
+		    #mic {
+		        font-size: 25px;
+		        width: 25px;
+		        height: 25px;
+		        cursor:pointer;
+		        border: none;
+		        position: absolute;
+		        margin-left: 5px;
+		        outline: none;
+		        background: transparent;
+		    }
+        </style>
 	</head>
 	<body>
             <input id="mic" type="text" x-webkit-speech />
 	</body>
-
-        <script>loadJarvis();</script>
+        <script>
+            var jarvis = new Jarvis(); 
+            jarvis.load();
+        </script>
 </html>
