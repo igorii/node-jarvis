@@ -1,4 +1,4 @@
-function Jarvis = {}
+function Jarvis () {};
 
 Jarvis.prototype.load = function () {
     var mic = document.getElementById('mic');
