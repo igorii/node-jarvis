@@ -7,6 +7,8 @@ var xmlParser = new xml.Parser();
 
 // Necessary Jarvis properties and urls
 function Jarvis () {
+    this.last1    = '';
+    this.last2    = '';
     this.wolfram  = 'api.wolframalpha.com';
     this.wolfpath = '/v2/query?appid=6LPKV5-YJ3YPXP8QG&format=plaintext&podtitle=Result&input=';
 }
@@ -68,14 +70,27 @@ http.createServer(function (request, response) {
         request.on('data', function (data) {  
             str += data;  
         });
-        
+
         request.on('end',  function () {  
-            console.log('Asking Jarvis: ' + str); 
-            jarvis.ask(str, function (answer) {
-                console.log('Jarvis responds: ' + answer);
-                response.writeHead(200, { 'Content-Type': 'text/html'  });
-                response.end(answer, 'utf-8')
-            });
+            response.writeHead(200, { 'Content-Type': 'text/html'  });
+            if (str.search('Hello') > -1 || str.search('hello') > -1) {
+                console.log('Greeting Jarvis with: ' + str);                 
+                response.end("Hello, master.", 'utf-8')
+            } else if (str.search('Thank') > -1 || str.search('thank') > -1) {
+                var thanks = ["You're welcome, master.", 
+                              "Anything for you, sir.",
+                              "Will that be all?"];
+                var chosen = Math.floor(Math.random() * 3);
+                jarvis.last2 = jarvis.last1;
+                jarvis.last1 = thanks[chosen];
+                response.end(thanks[chosen], 'utf-8')
+            } else if  {
+                console.log('Asking Jarvis: ' + str); 
+                jarvis.ask(str, function (answer) {
+                    console.log('Jarvis responds: ' + answer);
+                    response.end(answer, 'utf-8')
+                });
+            }
         });
     }
 }).listen(1337);

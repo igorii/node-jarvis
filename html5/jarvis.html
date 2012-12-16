@@ -14,11 +14,26 @@
 		        outline: none;
 		        background: transparent;
 		    }
+
+		    #all {
+		    	height: 100%;
+		    	width: 100%;
+		    	background-image: -webkit-linear-gradient(bottom, rgb(34,34,34) 23%, rgb(35,54,54) 0%);
+		    	background-image: -webkit-gradient(
+					linear,
+					left bottom,
+					left top,
+					color-stop(0.23, rgb(34,34,34)),
+					color-stop(0, rgb(35,54,54))
+				);
+		    }
         </style>
 	</head>
 	<body>
+		<div id="all">
             <input id="mic" type="text" x-webkit-speech />
             <iframe id="response"></iframe>
+        </div>
 	</body>
         <script>
             var jarvis = new JarvisWeb(); 

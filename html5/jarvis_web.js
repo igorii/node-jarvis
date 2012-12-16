@@ -10,7 +10,7 @@ JarvisWeb.prototype.load = function () {
     // Move mic to middle
     mic.style.left = window.innerWidth / 2 + 'px';
     mic.style.top  = window.innerHeight / 2 + 'px';
-    document.body.style.background = '#222222';
+    //document.body.style.background = '#222222';
     document.getElementById('response').hidden = true;
 
     // Register handler to activate when speech has finished
