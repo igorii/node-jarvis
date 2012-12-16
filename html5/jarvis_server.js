@@ -68,6 +68,7 @@ http.createServer(function (request, response) {
         request.on('data', function (data) {  
             str += data;  
         });
+        
         request.on('end',  function () {  
             console.log('Asking Jarvis: ' + str); 
             jarvis.ask(str, function (answer) {
