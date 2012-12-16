@@ -1,7 +1,7 @@
 <html>
 	<head>
         <title>Jarvis Server</title>
-        <script src='./jarvis.js'></script>
+        <script src='./jarvis_web.js'></script>
         <style>
 		    #mic {
 		        font-size: 25px;
@@ -14,13 +14,17 @@
 		        outline: none;
 		        background: transparent;
 		    }
+
+		    #body {
+		    	background: #222222;
+		    }
         </style>
 	</head>
 	<body>
             <input id="mic" type="text" x-webkit-speech />
 	</body>
         <script>
-            var jarvis = new Jarvis(); 
+            var jarvis = new JarvisWeb(); 
             jarvis.load();
         </script>
 </html>
