@@ -1,5 +1,9 @@
-var http    = require('http');
-var fs      = require('fs');
+var http    = require('http'),
+    fs      = require('fs'),
+    xml     = require('xml2js');
+
+// xml parser to extract result
+var xmlParser = new xml.Parser();
 
 // Necessary Jarvis properties and urls
 function Jarvis () {
@@ -18,7 +22,17 @@ Jarvis.prototype.ask = function(text, callback) {
     var process = function(response) {
         var str = '';
         response.on('data', function (chunk) {   str += chunk;   });
-        response.on('end',  function ()      {   console.log(str);     });
+        response.on('end',  function () {  
+            var obj = '';
+            try {
+                obj = xmlParser.parseString(str, function (err, result) {
+                    callback(result.queryresult.pod[0].subpod[0].plaintext[0]);  
+                });
+            } catch (e) {
+                console.log(e);
+                callback('Sorry master, I could not understand you');
+            }
+        });
     }
 
     http.request(options, process).end();
@@ -46,6 +60,7 @@ http.createServer(function (request, response) {
                 response.end();   
             }
         });
+
     // If a POST is received, do the appropriate Jarvis function
     } else if (request.method === 'POST' && filePath === './ask') {
         var str = '';
@@ -54,8 +69,12 @@ http.createServer(function (request, response) {
             str += data;  
         });
         request.on('end',  function () {  
-            console.log('Asking jarvis: ' + str); 
-            jarvis.ask(str);
+            console.log('Asking Jarvis: ' + str); 
+            jarvis.ask(str, function (answer) {
+                console.log('Jarvis responds: ' + answer);
+                response.writeHead(200, { 'Content-Type': 'text/html'  });
+                response.end(answer, 'utf-8')
+            });
         });
     }
 }).listen(1337);

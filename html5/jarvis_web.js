@@ -8,24 +8,27 @@ JarvisWeb.prototype.load = function () {
     // Move mic to middle
     mic.style.left = window.innerWidth / 2 + 'px';
     mic.style.top  = window.innerHeight / 2 + 'px';
+    document.body.style.background = '#222222';
 
     // Register handler to activate when speech has finished
     mic.onwebkitspeechchange = function (e) {
-        console.log(that.query(mic.value));
+        console.log(that.ask(mic.value));
     }
 }
 
-// Jarvis' query function sends a request to Jarvis server,
+// Jarvis' ask function sends a request to Jarvis server,
 // who responds with Wolfram|Alpha information.
-JarvisWeb.prototype.query = function (text) {
-	var url = '/ask';
+JarvisWeb.prototype.ask = function (text) {
+    var url = '/ask';
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-Type', 'text');
     
     xhr.onreadystatechange = function() {
-    	if (xhr.readyState === 4)
-    		return xhr.responseText;
+        if (xhr.readyState === 4) {
+            console.log('Received: ' + xhr.responseText);
+            return xhr.responseText;
+        }
     };
 
     xhr.send(text);
@@ -35,5 +38,5 @@ JarvisWeb.prototype.query = function (text) {
 // Jarvis server who POSTs google's tts service, and 
 // returns the recording for playback 
 JarvisWeb.prototype.say = function(text) {
- 	
+    
  }; 
