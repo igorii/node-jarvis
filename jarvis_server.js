@@ -1,6 +1,7 @@
 var http    = require('http'),
     fs      = require('fs'),
     xml     = require('xml2js');
+var port    = process.env.PORT || 1337;
 
 // xml parser to extract result
 var xmlParser = new xml.Parser();
@@ -93,8 +94,8 @@ http.createServer(function (request, response) {
             }
         });
     }
-}).listen(1337);
+}).listen(port);
 
 // Create Jarvis, and print a message indicating that Jarvis is listening
 var jarvis = new Jarvis();
-console.log('Jarvis running on port 1337...');
+console.log('Jarvis running on port ' + port + '...');

@@ -1,0 +1,13 @@
+{
+	"name": "node-jarvis",
+	"version": "0.0.1",
+	"dependencies": {
+		"http": "0.0.0",
+		"fs": "0.0.0",
+		"xml2js": "0.2.2"
+	},
+	"engines": {
+		"node": "0.8.x",
+		"npm": "1.1.x"
+	}
+}
