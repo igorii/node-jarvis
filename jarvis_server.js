@@ -85,7 +85,7 @@ http.createServer(function (request, response) {
                 jarvis.last2 = jarvis.last1;
                 jarvis.last1 = thanks[chosen];
                 response.end(thanks[chosen], 'utf-8')
-            } else  {
+            } else {
                 console.log('Asking Jarvis: ' + str); 
                 jarvis.ask(str, function (answer) {
                     console.log('Jarvis responds: ' + answer);
