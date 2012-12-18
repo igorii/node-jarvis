@@ -1,0 +1,53 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'child_process' ]
+2 info using npm@1.1.66
+3 info using node@v0.8.15
+4 verbose read json X:\Development\git-projects\node-jarvis\package.json
+5 verbose read json X:\Development\git-projects\node-jarvis\node_modules\async\package.json
+6 verbose read json X:\Development\git-projects\node-jarvis\node_modules\connect\package.json
+7 verbose read json X:\Development\git-projects\node-jarvis\node_modules\fs\package.json
+8 verbose read json X:\Development\git-projects\node-jarvis\node_modules\http\package.json
+9 verbose read json X:\Development\git-projects\node-jarvis\node_modules\xml2js\package.json
+10 verbose from cache X:\Development\git-projects\node-jarvis\package.json
+11 verbose readDependencies using package.json deps
+12 verbose cache add [ 'child_process', null ]
+13 silly cache add name=undefined spec="child_process" args=["child_process",null]
+14 verbose parsed url { pathname: 'child_process',
+14 verbose parsed url   path: 'child_process',
+14 verbose parsed url   href: 'child_process' }
+15 silly lockFile 4845fa97-child-process child_process
+16 verbose lock child_process C:\Users\Tim\AppData\Roaming\npm-cache\4845fa97-child-process.lock
+17 silly lockFile 4845fa97-child-process child_process
+18 verbose addNamed [ 'child_process', '' ]
+19 verbose addNamed [ null, '' ]
+20 silly lockFile 512a7ef6-child-process child_process@
+21 verbose lock child_process@ C:\Users\Tim\AppData\Roaming\npm-cache\512a7ef6-child-process.lock
+22 silly addNameRange { name: 'child_process', range: '', hasData: false }
+23 verbose url raw child_process
+24 verbose url resolving [ 'https://registry.npmjs.org/', './child_process' ]
+25 verbose url resolved https://registry.npmjs.org/child_process
+26 info trying registry request attempt 1 at 22:01:02
+27 http GET https://registry.npmjs.org/child_process
+28 http 404 https://registry.npmjs.org/child_process
+29 silly registry.get cb [ 404,
+29 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+29 silly registry.get     date: 'Mon, 17 Dec 2012 03:00:16 GMT',
+29 silly registry.get     'content-type': 'application/json',
+29 silly registry.get     'content-length': '52',
+29 silly registry.get     'cache-control': 'must-revalidate' } ]
+30 silly lockFile 512a7ef6-child-process child_process@
+31 error 404 'child_process' is not in the npm registry.
+31 error 404 You should bug the author to publish it
+31 error 404
+31 error 404 Note that you can also install from a
+31 error 404 tarball, folder, or http url, or git url.
+32 error System Windows_NT 6.1.7600
+33 error command "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "child_process"
+34 error cwd X:\Development\git-projects\node-jarvis
+35 error node -v v0.8.15
+36 error npm -v 1.1.66
+37 error code E404
+38 verbose exit [ 1, true ]

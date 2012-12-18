@@ -1,6 +1,7 @@
 var http    = require('http'),
     fs      = require('fs'),
-    xml     = require('xml2js');
+    xml     = require('xml2js'),
+    exec    = require('child_process').exec;
 var port    = process.env.PORT || 1337;
 
 // xml parser to extract result
@@ -33,6 +34,7 @@ Jarvis.prototype.ask = function(text, callback) {
                 });
             } catch (e) {
                 console.log(e);
+                console.log(str);
                 callback('Sorry master, I could not understand you');
             }
         });
@@ -66,6 +68,7 @@ http.createServer(function (request, response) {
 
     // If a POST is received, do the appropriate Jarvis function
     } else if (request.method === 'POST' && filePath === './ask') {
+        // TODO: Clean this up into a proper command switch
         var str = '';
 
         request.on('data', function (data) {  
@@ -73,8 +76,9 @@ http.createServer(function (request, response) {
         });
 
         request.on('end',  function () {  
+            str = str.toLowerCase();
             response.writeHead(200, { 'Content-Type': 'text/html'  });
-            if (str.search('Hello') > -1 || str.search('hello') > -1) {
+            if (str.search('hello') > -1) {
                 console.log('Greeting Jarvis with: ' + str);                 
                 response.end("Hello, master.", 'utf-8')
             } else if (str.search('Thank') > -1 || str.search('thank') > -1) {
@@ -85,6 +89,8 @@ http.createServer(function (request, response) {
                 jarvis.last2 = jarvis.last1;
                 jarvis.last1 = thanks[chosen];
                 response.end(thanks[chosen], 'utf-8')
+            } else if (str.search('start') > -1 && str.search('notepad') > -1) {
+                exec('notepad');
             } else {
                 console.log('Asking Jarvis: ' + str); 
                 jarvis.ask(str, function (answer) {
