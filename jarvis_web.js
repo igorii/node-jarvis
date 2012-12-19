@@ -1,7 +1,9 @@
 function JarvisWeb () {
 
     // Text to speech url
-    this.ttsurl = 'http://translate.google.com/translate_tts?tl=en&q=';
+    this.ttsurl          = 'http://translate.google.com/translate_tts?tl=en&q=';
+    this.currentResponse = '';
+    this.currIndex       = 0;
 }
 
 // Loading work for Jarvis, set styles and event handlers
@@ -46,21 +48,6 @@ JarvisWeb.prototype.ask = function (text) {
         if (xhr.readyState === 4) {
             console.log('Received: ' + xhr.responseText);
 
-            // Remove old responseText div
-            var old = null;
-            if (old = document.getElementById('responseText'))
-                old.parentNode.removeChild(old);            
-
-            // Create response div
-            var responseDiv = document.createElement('div');
-            document.getElementById('all').appendChild(responseDiv);
-
-            // Insert the respones into the new div, and center the div
-            responseDiv.innerHTML  = xhr.responseText;
-            responseDiv.style.top  = (window.innerHeight / 2) - 300 + 'px';
-            responseDiv.id         = 'responseText';     
-            responseDiv.style.left = (window.innerWidth / 2) - (responseDiv.offsetWidth / 2)  + 'px';
-
             // Speak the response 
             that.say(xhr.responseText);
         }
@@ -69,10 +56,40 @@ JarvisWeb.prototype.ask = function (text) {
     xhr.send(text);
 };
 
+JarvisWeb.prototype.updateResponse = function () {
+    if (jarvis.currIndex >= jarvis.currentResponse.length) {
+        jarvis.currIndex = 0; // Reset index for next request
+        return;
+    }
+
+    var responseDiv         = document.getElementById('responseText');
+    responseDiv.innerHTML  += jarvis.currentResponse[jarvis.currIndex++];
+    responseDiv.style.left  = (window.innerWidth / 2) - (responseDiv.offsetWidth / 2)  + 'px';
+    setTimeout(jarvis.updateResponse, 50);
+};
+
 // Jarvis' text to speech function, sends a request to
 // Jarvis server who POSTs google's tts service, and 
 // returns the recording for playback 
 JarvisWeb.prototype.say = function(text) {
+    // Remove old responseText div
+    var old = null;
+    if (old = document.getElementById('responseText'))
+        old.parentNode.removeChild(old);            
+
+    // Create response div
+    var responseDiv = document.createElement('div');
+    document.getElementById('all').appendChild(responseDiv);
+
+    // Insert the respones into the new div, and center the div
+    //responseDiv.innerHTML  = text;
+    responseDiv.style.top  = (window.innerHeight / 2) - 300 + 'px';
+    responseDiv.id         = 'responseText';     
+    this.currentResponse   = text; 
+
+    setTimeout(this.updateResponse, 50);
+
+    // Speak using google text to speech in an iframe (google translator)
     var responseFrame = document.getElementById('response');
     responseFrame.src = this.ttsurl + encodeURIComponent(text);
  }; 
