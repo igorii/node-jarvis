@@ -24,7 +24,7 @@ JarvisWeb.prototype.load = function () {
     // Register handler to activate when speech has finished
     mic.onwebkitspeechchange = function (e) {
         that.ask(mic.value);
-    }
+    };
 
     // Send a request when the user presses enter, and clear the text field
     text.onkeydown = function (e) {
@@ -32,8 +32,8 @@ JarvisWeb.prototype.load = function () {
             that.ask(text.value);
             text.value = '';
         }
-    }
-}
+    };
+};
 
 // Jarvis' ask function sends a request to Jarvis server,
 // who responds with Wolfram|Alpha information.
