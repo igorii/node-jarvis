@@ -38,7 +38,7 @@ Jarvis.prototype.ask = function(text, callback) {
                 callback('Sorry master, I could not understand you');
             }
         });
-    }
+    };
 
     http.request(options, process).end();
 };
@@ -80,7 +80,7 @@ http.createServer(function (request, response) {
             response.writeHead(200, { 'Content-Type': 'text/html'  });
             if (str.search('hello') > -1) {
                 console.log('Greeting Jarvis with: ' + str);                 
-                response.end("Hello, master.", 'utf-8')
+                response.end("Hello, master.", 'utf-8');
             } else if (str.search('Thank') > -1 || str.search('thank') > -1) {
                 var thanks = ["You're welcome, master.", 
                               "Anything for you, sir.",
@@ -88,14 +88,14 @@ http.createServer(function (request, response) {
                 var chosen = Math.floor(Math.random() * 3);
                 jarvis.last2 = jarvis.last1;
                 jarvis.last1 = thanks[chosen];
-                response.end(thanks[chosen], 'utf-8')
+                response.end(thanks[chosen], 'utf-8');
             } else if (str.search('start') > -1 && str.search('notepad') > -1) {
                 exec('notepad');
             } else {
                 console.log('Asking Jarvis: ' + str); 
                 jarvis.ask(str, function (answer) {
                     console.log('Jarvis responds: ' + answer);
-                    response.end(answer, 'utf-8')
+                    response.end(answer, 'utf-8');
                 });
             }
         });
